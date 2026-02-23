@@ -28,16 +28,16 @@
 ```mermaid
 graph LR
     subgraph "Ingestion Flow (Загрузка знаний)"
-        PDF[📄 PDF Files] -->|Upload| Splitter[✂️ Text Splitter];
-        Splitter -->|Chunk Size: 1000| Embed[🧠 Embedding Model];
-        Embed -->|Vectors| Qdrant[(🗄️ Qdrant DB)];
+        PDF["📄 PDF Files"] -->|Upload| Splitter["✂️ Text Splitter"]
+        Splitter -->|Chunk Size: 1000| Embed["🧠 Embedding Model"]
+        Embed -->|Vectors| Qdrant[("🗄️ Qdrant DB")]
     end
 
     subgraph "Chat Flow (Диалог)"
-        User(Студент) -->|Question| Chain[🔗 Conversational QA Chain];
-        Chain -->|Query Vector| Retriever[🔍 Vector Retriever];
-        Retriever -.->|Search Top-20| Qdrant;
-        Qdrant -.->|Context| Chain;
-        Chain -->|Context + Strict Prompt| LLM[🤖 Gemma 3 (Ollama)];
-        LLM -->|Final Answer| User;
+        User["👤 Студент"] -->|Question| Chain["🔗 Conversational QA Chain"]
+        Chain -->|Query Vector| Retriever["🔍 Vector Retriever"]
+        Retriever -.->|Search Top-20| Qdrant
+        Qdrant -.->|Context| Chain
+        Chain -->|Context + Strict Prompt| LLM["🤖 Gemma 3 (Ollama)"]
+        LLM -->|Final Answer| User
     end
